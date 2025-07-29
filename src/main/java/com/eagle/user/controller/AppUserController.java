@@ -2,6 +2,7 @@ package com.eagle.user.controller;
 
 import com.eagle.user.service.AppUserService;
 import com.eagle.user.dto.UserDto;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +20,9 @@ class AppUserController {
     }
 
     @GetMapping
-    ResponseEntity<List<UserDto>> getAllActiveUser(){
-     return ResponseEntity.ok(appUserService.getAllActiveUser());
+    ResponseEntity<Page<UserDto>> getAllActiveUser(@PathVariable(name = "page", value = "0") int page,
+                                                   @PathVariable(name = "size", value = "1000") int size){
+     return ResponseEntity.ok(appUserService.getAllActiveUser(page,size));
     }
 
     @GetMapping("/{id}")

@@ -9,6 +9,10 @@ import com.eagle.user.repository.AuthTokenRepository;
 import com.eagle.util.EncryptDecrypt;
 import com.eagle.util.IdGenerator;
 import com.eagle.util.Patcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -37,8 +41,16 @@ public class AppUserService {
         this.patcher = patcher;
     }
 
-     public List<UserDto> getAllActiveUser(){
-        return appUserRepository.findByEnabledTrue().stream().map(commonMapper::toUserDto).collect(Collectors.toList());
+     public Page<UserDto> getAllActiveUser(int page, int size){
+         Pageable pageable = PageRequest.of(page,size);
+         Page<AppUser> userDtoPage = appUserRepository.findByEnabledTrue(pageable);
+
+         List<UserDto> userDtoList = userDtoPage.getContent()
+                 .stream()
+                 .map(commonMapper::toUserDto)
+                .toList();
+
+        return new PageImpl<>(userDtoList,pageable,userDtoPage.getTotalElements());
     }
 
     public Optional<AppUser> getUserById(String id){
