@@ -1,0 +1,54 @@
+server:
+  port: 8090
+
+
+spring:
+  profile: dev
+  main:
+    banner-mode: off
+  application:
+    name: app-user
+
+  datasource:
+    url: ${db-url}
+    username: ${db-username}
+    password: ${db-password}
+    driver-class-name: org.postgresql.Driver
+  # Optional: JPA/Hibernate configurations
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+#  data:
+#    mongodb:
+#      host: localhost
+#      port: 27017
+#      database: eagledb
+#      username: mongoadmin
+#      password: p@ssw0rd
+#      authentication-database: admin
+#      auto-index-creation: true
+
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/eagle_app
+#    username: root
+#    password: p@ssw0rd
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+
+security:
+  jwt:
+    secret-key: ${key}
+    expiration-time: ${time}
+    algorithm: ${algorithm}
+    secretLocalKey: ${secret-local}
+    cookie-name: ${cookie}
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
