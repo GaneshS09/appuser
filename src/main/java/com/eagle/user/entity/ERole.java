@@ -1,6 +1,6 @@
-package com.eagle.user;
+package com.eagle.user.entity;
 
-enum ERole {
+public enum ERole {
     ROLE_ADMIN,
     ROLE_MODERATE,
     ROLE_USER

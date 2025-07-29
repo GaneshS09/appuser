@@ -1,5 +1,11 @@
-package com.eagle.user;
+package com.eagle.user.service;
 
+import com.eagle.user.CommonMapper;
+import com.eagle.user.dto.UserDto;
+import com.eagle.user.entity.AppUser;
+import com.eagle.user.entity.AuthToken;
+import com.eagle.user.repository.AppUserRepository;
+import com.eagle.user.repository.AuthTokenRepository;
 import com.eagle.util.EncryptDecrypt;
 import com.eagle.util.IdGenerator;
 import com.eagle.util.Patcher;
@@ -10,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AppUserService {
@@ -22,7 +29,7 @@ public class AppUserService {
 
 
 
-    AppUserService(AppUserRepository appUserRepository, AuthTokenRepository authTokenRepository, CommonMapper commonMapper, EncryptDecrypt encryptDecrypt, Patcher patcher) {
+    public AppUserService(AppUserRepository appUserRepository, AuthTokenRepository authTokenRepository, CommonMapper commonMapper, EncryptDecrypt encryptDecrypt, Patcher patcher) {
         this.appUserRepository = appUserRepository;
         this.authTokenRepository = authTokenRepository;
         this.commonMapper = commonMapper;
@@ -30,15 +37,15 @@ public class AppUserService {
         this.patcher = patcher;
     }
 
-     List<AppUser> getAllActiveUser(){
-        return appUserRepository.findByEnabledTrue();
+     public List<UserDto> getAllActiveUser(){
+        return appUserRepository.findByEnabledTrue().stream().map(commonMapper::toUserDto).collect(Collectors.toList());
     }
 
-    Optional<AppUser> getUserById(String id){
+    public Optional<AppUser> getUserById(String id){
         return appUserRepository.findByIdAndEnabledTrue(id);
     }
 
-     ResponseEntity<UserDto> register(UserDto userDto) throws IOException {
+     public ResponseEntity<UserDto> register(UserDto userDto) throws IOException {
         try{
             AppUser appUser = commonMapper.toUser(userDto);
 
@@ -53,7 +60,7 @@ public class AppUserService {
 
     }
 
-      ResponseEntity<UserDto> update(String id, UserDto userDto) throws IllegalAccessException {
+      public ResponseEntity<UserDto> update(String id, UserDto userDto) throws IllegalAccessException {
         AppUser optionalUser = appUserRepository.findById(id).get();
             if(optionalUser == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(userDto);
@@ -77,7 +84,7 @@ public class AppUserService {
         return userIdGenerator.generateId(prefix, lastUser );
     }
 
-     Optional<AppUser> softDeleteUser(String id){
+     public Optional<AppUser> softDeleteUser(String id){
         return appUserRepository.findByIdAndEnabledTrue(id).map(user -> {
             user.setEnabled(false);
             user.setAccountNonLocked(false);

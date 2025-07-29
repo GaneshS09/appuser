@@ -1,5 +1,6 @@
-package com.eagle.user;
+package com.eagle.user.repository;
 
+import com.eagle.user.entity.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

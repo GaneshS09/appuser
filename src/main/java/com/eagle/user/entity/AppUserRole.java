@@ -1,15 +1,15 @@
-package com.eagle.user;
+package com.eagle.user.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "app_role")
 public class AppUserRole {
@@ -18,4 +18,8 @@ public class AppUserRole {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String roleName;
+
+
+    public AppUserRole(String roleUser) {
+    }
 }

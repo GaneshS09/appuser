@@ -1,6 +1,6 @@
 package com.eagle.util;
 
-import com.eagle.auth.AppUserDetails;
+import com.eagle.auth.service.AppUserDetails;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

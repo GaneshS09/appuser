@@ -1,7 +1,7 @@
-package com.eagle.auth;
+package com.eagle.auth.service;
 
-import com.eagle.user.AppUser;
-import com.eagle.user.AppUserRepository;
+import com.eagle.user.entity.AppUser;
+import com.eagle.user.repository.AppUserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

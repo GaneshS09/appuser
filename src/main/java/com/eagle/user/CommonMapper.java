@@ -1,12 +1,16 @@
 package com.eagle.user;
 
+import com.eagle.user.dto.UserDto;
+import com.eagle.user.entity.AppUser;
+import com.eagle.user.entity.AppUserRole;
+import com.eagle.user.repository.AppUserRoleRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Component
-class CommonMapper {
+public class CommonMapper {
 
     private final AppUserRoleRepository appUserRoleRepository;
 
@@ -14,7 +18,7 @@ class CommonMapper {
         this.appUserRoleRepository = appUserRoleRepository;
     }
 
-    AppUser toUser(UserDto userDto) {
+    public AppUser toUser(UserDto userDto) {
 
         Set<AppUserRole> appRoles =  new HashSet<>();
         for(String role : userDto.roles()){
@@ -44,7 +48,7 @@ class CommonMapper {
     }
 
 
-    UserDto toUserDto(AppUser appUser) {
+   public UserDto toUserDto(AppUser appUser) {
 
         Set<String> roles = new HashSet<>();
         for(AppUserRole role : appUser.getRoles()){
@@ -61,11 +65,11 @@ class CommonMapper {
                 appUser.getMiddleName(),
                 appUser.getLastName(),
                 appUser.getProfilePhoto(),
-                roles,
                 appUser.isEnabled(),
                 appUser.isAccountNonLocked(),
                 appUser.isAccountNonExpired(),
-                appUser.isCredentialsNonExpired()
+                appUser.isCredentialsNonExpired(),
+                roles
         );
     }
 }

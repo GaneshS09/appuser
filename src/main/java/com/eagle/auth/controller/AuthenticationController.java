@@ -1,8 +1,8 @@
-package com.eagle.auth;
+package com.eagle.auth.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.ResponseCookie;
+
+import com.eagle.auth.dto.request.LoginRequestDto;
+import com.eagle.auth.service.AuthUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/eagle/auth")
-class AuthenticationController {
+public class AuthenticationController {
 
     private final AuthUserService authUserService;
 
@@ -20,7 +20,7 @@ class AuthenticationController {
     }
 
     @PostMapping
-    ResponseEntity<?> authenticateUser(@RequestBody LoginRequestDto loginRequestDto) {
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequestDto loginRequestDto) {
         return authUserService.authenticateUser(loginRequestDto);
     }
 

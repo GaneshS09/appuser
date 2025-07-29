@@ -1,4 +1,4 @@
-package com.eagle.user;
+package com.eagle.user.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

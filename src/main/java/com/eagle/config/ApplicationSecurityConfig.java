@@ -1,6 +1,6 @@
 package com.eagle.config;
 
-import com.eagle.auth.AppUserDetailsService;
+import com.eagle.auth.service.AppUserDetailsService;
 import com.eagle.util.AuthEntryPointJwt;
 import com.eagle.util.AuthTokenFilter;
 import org.springframework.context.annotation.Bean;

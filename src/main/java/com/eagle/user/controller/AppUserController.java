@@ -1,12 +1,12 @@
-package com.eagle.user;
+package com.eagle.user.controller;
 
-import org.springframework.http.HttpStatus;
+import com.eagle.user.service.AppUserService;
+import com.eagle.user.dto.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/eagle/user")
@@ -19,12 +19,12 @@ class AppUserController {
     }
 
     @GetMapping
-    ResponseEntity<List<AppUser>> getAllActiveUser(){
+    ResponseEntity<List<UserDto>> getAllActiveUser(){
      return ResponseEntity.ok(appUserService.getAllActiveUser());
     }
 
     @GetMapping("/{id}")
-    private ResponseEntity<?> getUserById(@PathVariable String id){
+    ResponseEntity<?> getUserById(@PathVariable String id){
         return appUserService.getUserById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 

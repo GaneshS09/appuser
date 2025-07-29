@@ -1,9 +1,11 @@
-package com.eagle.auth;
+package com.eagle.auth.service;
 
-import com.eagle.user.AppUser;
-import com.eagle.user.AppUserService;
-import com.eagle.user.AuthToken;
-import com.eagle.user.AuthTokenRepository;
+
+import com.eagle.auth.dto.request.LoginRequestDto;
+import com.eagle.auth.dto.response.LoginResponse;
+import com.eagle.user.entity.AppUser;
+import com.eagle.user.service.AppUserService;
+import com.eagle.user.repository.AuthTokenRepository;
 import com.eagle.util.JwtUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -16,24 +18,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
-class AuthUserService {
+public class AuthUserService {
 
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
     private final AuthTokenRepository authTokenRepository;
     private final AppUserService appUserService;
 
-    AuthUserService(AuthenticationManager authenticationManager, JwtUtils jwtUtils, AuthTokenRepository authTokenRepository, AppUserService appUserService) {
+    public AuthUserService(AuthenticationManager authenticationManager, JwtUtils jwtUtils, AuthTokenRepository authTokenRepository, AppUserService appUserService) {
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
         this.authTokenRepository = authTokenRepository;
         this.appUserService = appUserService;
     }
 
-    ResponseEntity<?> authenticateUser(LoginRequestDto loginRequestDto){
+    public ResponseEntity<?> authenticateUser(LoginRequestDto loginRequestDto){
 
         Optional<AppUser> appUser = appUserService.getByEmailId(loginRequestDto.email());
 

@@ -1,6 +1,6 @@
 package com.eagle.util;
 
-import com.eagle.auth.AppUserDetailsService;
+import com.eagle.auth.service.AppUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

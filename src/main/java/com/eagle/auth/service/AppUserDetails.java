@@ -1,6 +1,6 @@
-package com.eagle.auth;
+package com.eagle.auth.service;
 
-import com.eagle.user.AppUser;
+import com.eagle.user.entity.AppUser;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
